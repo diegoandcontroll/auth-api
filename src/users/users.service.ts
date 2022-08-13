@@ -64,7 +64,7 @@ export class UsersService {
 
     if (!user) throw new NotFoundException(`NOT FOUND USER WITH ID - ${id}`);
 
-    const userUpdated = await this.userRepository.update(id, updateUserDto);
+    await this.userRepository.update(id, updateUserDto);
 
     return this.findById(id);
   }
