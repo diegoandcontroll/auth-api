@@ -14,6 +14,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { FindUserEmail } from './dto/find-email.dto';
 import { CreateUserDto } from './dto/user-create.dto';
 import { UpdateUserDto } from './dto/user-update.dto';
 import { UsersService } from './users.service';
@@ -25,7 +26,7 @@ export class UsersController {
     private readonly authService: AuthService,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   find() {
     return this.userService.findAll();
@@ -40,7 +41,10 @@ export class UsersController {
   async create(@Body() body: CreateUserDto) {
     return this.userService.create(body);
   }
-
+  @Post('/email')
+  async findByEmail(@Body() body: FindUserEmail) {
+    return this.userService.findByEmail(body.email);
+  }
   @Put(':id')
   async update(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return this.userService.update(id, body);
@@ -50,11 +54,5 @@ export class UsersController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('id') id: string) {
     return this.userService.delete(id);
-  }
-
-  @UseGuards(AuthGuard('local'))
-  @Post('/login')
-  async login(@Request() req) {
-    return this.authService.login(req.user);
   }
 }
