@@ -7,6 +7,8 @@ services:
       - 3000:3000
     volumes:
       - .:/home/api
+    depends_on:
+      - database
   database:
     container_name: nest_db_auth
     image: 'postgres:13'
@@ -16,3 +18,5 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - 5432:5432
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data

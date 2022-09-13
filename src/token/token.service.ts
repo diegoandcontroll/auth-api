@@ -54,7 +54,7 @@ export class TokenService {
       );
     }
 
-    const user = await this.userService.findOne(objToken.username);
+    const user = await this.userService.findByEmail(objToken.username);
     return this.authService.login(user);
   }
 }

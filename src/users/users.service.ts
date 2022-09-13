@@ -49,8 +49,10 @@ export class UsersService {
 
     return user;
   }
-  async findOne(email: string) {
-    return await this.userRepository.findOne({ where: { email } });
+  async findByEmail(email: string): Promise<UsersEntity> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    return user;
   }
 
   async create(createUserDto: CreateUserDto): Promise<UsersEntity[]> {
