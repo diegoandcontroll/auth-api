@@ -6,6 +6,7 @@ import { DbModule } from './db/db.module';
 import { AuthModule } from './auth/auth.module';
 import { TokenModule } from './token/token.module';
 import { UsersModule } from './users/users.module';
+import { HeroesModule } from './heroes/heroes.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     TokenModule,
     UsersModule,
+    HeroesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

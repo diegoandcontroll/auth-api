@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { RefreshTokenDto } from 'src/token/dto/refresh-token.dto';
+import { RefreshTokenDto } from 'src/token/dtos/refresh-token.dto';
 import { TokenService } from 'src/token/token.service';
 import { AuthService } from './auth.service';
 
