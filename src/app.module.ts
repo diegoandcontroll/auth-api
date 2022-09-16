@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { TokenModule } from './token/token.module';
 import { UsersModule } from './users/users.module';
 import { HeroesModule } from './heroes/heroes.module';
+import { TavernModule } from './tavern/tavern.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { HeroesModule } from './heroes/heroes.module';
     TokenModule,
     UsersModule,
     HeroesModule,
+    TavernModule,
   ],
   controllers: [AppController],
   providers: [AppService],
