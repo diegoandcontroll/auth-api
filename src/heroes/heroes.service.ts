@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { Tavern } from 'src/tavern/tavern.entity';
 import { Repository } from 'typeorm';
 import { CreateHero } from './dtos/create-heros.dto';
 import { Heroes } from './hero.entity';
@@ -11,21 +12,30 @@ export class HeroesService {
   ) {}
 
   async findHeroes(): Promise<Heroes[]> {
-    return await this.heroRepository.find();
+    return await this.heroRepository.find({
+      relations: {
+        tavern: true,
+      },
+    });
   }
 
   async createHeroes(createHeroBody: CreateHero): Promise<Heroes> {
     if (!createHeroBody) new HttpException('NOT BODY', HttpStatus.BAD_REQUEST);
 
     const hero = this.heroRepository.create(createHeroBody);
-    hero.slug.toLowerCase();
-    await this.heroRepository.save(hero);
 
-    return hero;
+    hero.slug.toLowerCase();
+
+    return await this.heroRepository.save(hero);
   }
 
   async findOne(id: string): Promise<Heroes> {
-    const hero = await this.heroRepository.findOne({ where: { id } });
+    const hero = await this.heroRepository.findOne({
+      where: { id },
+      relations: {
+        tavern: true,
+      },
+    });
     if (!hero) new HttpException('HERO NOT FOUND', HttpStatus.NOT_FOUND);
 
     return hero;
@@ -33,7 +43,12 @@ export class HeroesService {
 
   async findSlug(name: string): Promise<Heroes> {
     name.toLowerCase();
-    const hero = await this.heroRepository.findOne({ where: { slug: name } });
+    const hero = await this.heroRepository.findOne({
+      where: { slug: name },
+      relations: {
+        tavern: true,
+      },
+    });
 
     if (!hero) new HttpException('HERO NOT FOUND', HttpStatus.NOT_FOUND);
 

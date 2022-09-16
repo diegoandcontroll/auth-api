@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Tavern } from 'src/tavern/tavern.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -47,8 +52,8 @@ export class Heroes {
   @Column({ name: 'mana_points' })
   mana_points: number;
 
-  @Column()
-  tavern: string;
+  @OneToMany((type) => Tavern, (heroes) => heroes.heroes)
+  tavern: Tavern[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;
