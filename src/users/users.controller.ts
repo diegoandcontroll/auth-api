@@ -14,9 +14,9 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { FindUserEmail } from './dto/find-email.dto';
-import { CreateUserDto } from './dto/user-create.dto';
-import { UpdateUserDto } from './dto/user-update.dto';
+import { FindUserEmail } from './dtos/find-email.dto';
+import { CreateUserDto } from './dtos/user-create.dto';
+import { UpdateUserDto } from './dtos/user-update.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')

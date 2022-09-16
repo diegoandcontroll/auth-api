@@ -1,5 +1,5 @@
 import { Body, Controller, Put } from '@nestjs/common';
-import { RefreshTokenDto } from './dto/refresh-token.dto';
+import { RefreshTokenDto } from './dtos/refresh-token.dto';
 import { TokenService } from './token.service';
 
 @Controller('token')
