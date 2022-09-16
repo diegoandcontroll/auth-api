@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -51,8 +52,8 @@ export class Heroes {
   @Column({ name: 'mana_points' })
   mana_points: number;
 
-  @OneToMany((type) => Tavern, (tavern) => tavern.id, { eager: true })
-  tavern: Tavern;
+  @OneToMany((type) => Tavern, (heroes) => heroes.heroes)
+  tavern: Tavern[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;

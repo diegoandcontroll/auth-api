@@ -12,6 +12,14 @@ export class TavernService {
   async createTavern(data: CreateTavern): Promise<Tavern> {
     if (!data) new HttpException('NOT BODY', HttpStatus.BAD_REQUEST);
     const tavern = this.tavernRepository.create(data);
-    return tavern;
+    return await this.tavernRepository.save(tavern);
+  }
+
+  async find(): Promise<Tavern[]> {
+    return this.tavernRepository.find({
+      relations: {
+        heroes: true,
+      },
+    });
   }
 }

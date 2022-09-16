@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -18,7 +19,7 @@ export class Tavern {
   @Column()
   name: string;
 
-  @ManyToOne((type) => Heroes, (hero) => hero.id, { eager: true })
+  @ManyToOne((type) => Heroes, (tavern) => tavern.tavern)
   heroes: Heroes;
 
   @CreateDateColumn({ name: 'created_at' })

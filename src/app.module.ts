@@ -8,6 +8,11 @@ import { TokenModule } from './token/token.module';
 import { UsersModule } from './users/users.module';
 import { HeroesModule } from './heroes/heroes.module';
 import { TavernModule } from './tavern/tavern.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Heroes } from './heroes/hero.entity';
+import { TokenEntity } from './token/token.entity';
+import { Tavern } from './tavern/tavern.entity';
+import { UsersEntity } from './users/user.entity';
 
 @Module({
   imports: [
