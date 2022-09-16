@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Heroes } from 'src/heroes/hero.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -14,6 +17,9 @@ export class Tavern {
 
   @Column()
   name: string;
+
+  @ManyToOne((type) => Heroes, (hero) => hero.tavern, { eager: true })
+  heroes: Heroes;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;
