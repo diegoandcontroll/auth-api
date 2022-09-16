@@ -18,7 +18,7 @@ export class Tavern {
   @Column()
   name: string;
 
-  @ManyToOne((type) => Heroes, (hero) => hero.tavern, { eager: true })
+  @ManyToOne((type) => Heroes, (hero) => hero.id, { eager: true })
   heroes: Heroes;
 
   @CreateDateColumn({ name: 'created_at' })

@@ -1,4 +1,5 @@
 import { IsString, IsNumber, IsNotEmpty } from 'class-validator';
+import { Tavern } from 'src/tavern/tavern.entity';
 export class CreateHero {
   @IsString()
   @IsNotEmpty()
@@ -50,5 +51,5 @@ export class CreateHero {
 
   @IsString()
   @IsNotEmpty()
-  tavern: string;
+  tavern: Tavern;
 }

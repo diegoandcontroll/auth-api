@@ -52,7 +52,7 @@ export class Heroes {
   mana_points: number;
 
   @OneToMany((type) => Tavern, (tavern) => tavern.id, { eager: true })
-  tavern: Tavern[];
+  tavern: Tavern;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;
