@@ -14,32 +14,38 @@ export class Heroes {
   @Column({ name: 'first_name' })
   name: string;
 
+  @Column({ name: 'last_name' })
+  lastname: string;
+
+  @Column()
+  slug: string;
+
+  @Column()
+  description: string;
+
   @Column({ name: 'logo_hero' })
-  logoHero: string;
+  logo_hero: string;
 
   @Column({ name: 'animate_hero' })
   animate_hero: string;
 
-  @Column({ name: 'last_name' })
-  lastName: string;
-
   @Column({ name: 'main_attribute' })
-  mainAttribute: string;
+  main_attribute: string;
 
   @Column()
-  agility: number;
+  agility: string;
 
   @Column()
-  force: number;
+  force: string;
 
   @Column()
-  intelligence: number;
+  intelligence: string;
 
   @Column({ name: 'health_points' })
-  healthPoints: number;
+  health_points: number;
 
   @Column({ name: 'mana_points' })
-  manaPoints: number;
+  mana_points: number;
 
   @Column()
   tavern: string;
