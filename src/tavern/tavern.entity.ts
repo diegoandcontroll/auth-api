@@ -19,6 +19,9 @@ export class Tavern {
   @Column()
   name: string;
 
+  @Column()
+  tavern_url: string;
+
   @ManyToOne((type) => Heroes, (tavern) => tavern.tavern)
   heroes: Heroes;
 
