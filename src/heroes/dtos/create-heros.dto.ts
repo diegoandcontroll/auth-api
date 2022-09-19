@@ -49,4 +49,8 @@ export class CreateHero {
   @IsNumber()
   @IsNotEmpty()
   mana_points: number;
+
+  @IsString()
+  @IsNotEmpty()
+  tavern: Tavern;
 }

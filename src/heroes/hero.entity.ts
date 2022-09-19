@@ -59,4 +59,7 @@ export class Heroes {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: string;
+
+  @ManyToOne(() => Tavern, (tavern) => tavern.heroes)
+  tavern: Tavern;
 }

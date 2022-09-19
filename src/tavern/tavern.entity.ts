@@ -31,4 +31,7 @@ export class Tavern {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: string;
+
+  @OneToMany(() => Heroes, (heroes) => heroes.tavern)
+  heroes: Heroes[];
 }
