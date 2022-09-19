@@ -8,8 +8,4 @@ export class CreateTavern {
   @IsString()
   @IsNotEmpty()
   tavern_url: string;
-
-  @IsString()
-  @IsNotEmpty()
-  heroes: Heroes;
 }

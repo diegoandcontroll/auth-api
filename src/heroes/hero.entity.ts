@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Skills } from 'src/skills/skills.entity';
 import { Tavern } from 'src/tavern/tavern.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -51,9 +53,6 @@ export class Heroes {
 
   @Column({ name: 'mana_points' })
   mana_points: number;
-
-  @OneToMany((type) => Tavern, (heroes) => heroes.heroes)
-  tavern: Tavern[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;

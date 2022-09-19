@@ -1,4 +1,5 @@
 import { IsString, IsNumber, IsNotEmpty, IsOptional } from 'class-validator';
+
 import { Tavern } from 'src/tavern/tavern.entity';
 export class CreateHero {
   @IsString()
@@ -48,8 +49,4 @@ export class CreateHero {
   @IsNumber()
   @IsNotEmpty()
   mana_points: number;
-
-  @IsString()
-  @IsOptional()
-  tavern: Tavern[];
 }
