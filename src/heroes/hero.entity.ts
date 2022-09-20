@@ -62,9 +62,15 @@ export class Heroes {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: string;
 
-  @ManyToOne(() => Tavern, (tavern) => tavern.heroes)
+  @ManyToOne(() => Tavern, (tavern) => tavern.heroes, {
+    eager: true,
+    cascade: true,
+  })
   tavern: Tavern;
 
-  @OneToMany(() => Skills, (skills) => skills.heroes)
+  @OneToMany(() => Skills, (skills) => skills.heroes, {
+    eager: true,
+    cascade: true,
+  })
   skills: Skills[];
 }

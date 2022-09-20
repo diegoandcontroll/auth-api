@@ -5,6 +5,11 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
+import {
+  IPaginationOptions,
+  paginate,
+  Pagination,
+} from 'nestjs-typeorm-paginate';
 
 import { TavernService } from 'src/tavern/tavern.service';
 import { Repository } from 'typeorm';
@@ -66,6 +71,9 @@ export class HeroesService {
     if (!hero) new HttpException('HERO NOT FOUND', HttpStatus.NOT_FOUND);
 
     return hero;
+  }
+  async paginate(options: IPaginationOptions): Promise<Pagination<Heroes>> {
+    return paginate<Heroes>(this.heroRepository, options);
   }
   async delete(id: string): Promise<string> {
     const hero = await this.heroRepository.findOne({ where: { id } });
