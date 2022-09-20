@@ -6,6 +6,8 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -62,4 +64,7 @@ export class Heroes {
 
   @ManyToOne(() => Tavern, (tavern) => tavern.heroes)
   tavern: Tavern;
+
+  @OneToMany(() => Skills, (skills) => skills.heroes)
+  skills: Skills[];
 }

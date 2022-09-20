@@ -5,8 +5,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -54,4 +53,7 @@ export class Skills {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: string;
+
+  @ManyToOne(() => Heroes, (heroes) => heroes.skills)
+  heroes: Heroes;
 }

@@ -25,6 +25,7 @@ export class HeroesService {
     return await this.heroRepository.find({
       relations: {
         tavern: true,
+        skills: true,
       },
     });
   }

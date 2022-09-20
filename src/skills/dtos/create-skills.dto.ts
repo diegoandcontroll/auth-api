@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsBoolean } from 'class-validator';
+import { IsString, IsNotEmpty, IsBoolean, IsOptional } from 'class-validator';
 import { Heroes } from 'src/heroes/hero.entity';
 
 export class CreateSkills {
@@ -45,4 +45,7 @@ export class CreateSkills {
   @IsString()
   @IsNotEmpty()
   level_4: string;
+
+  @IsNotEmpty()
+  heroes: Heroes;
 }
