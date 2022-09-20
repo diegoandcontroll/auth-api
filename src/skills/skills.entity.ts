@@ -45,7 +45,7 @@ export class Skills {
   @Column()
   level_3: string;
 
-  @Column()
+  @Column({ nullable: true })
   level_4: string;
 
   @CreateDateColumn({ name: 'created_at' })

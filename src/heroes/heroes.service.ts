@@ -9,6 +9,7 @@ import {
 import { TavernService } from 'src/tavern/tavern.service';
 import { Repository } from 'typeorm';
 import { CreateHero } from './dtos/create-heros.dto';
+import { UpdateHero } from './dtos/update-hero.dto';
 import { Heroes } from './hero.entity';
 
 @Injectable()
@@ -31,6 +32,7 @@ export class HeroesService {
   }
 
   async createHeroes(createHeroBody: CreateHero): Promise<Heroes> {
+    createHeroBody.slug.toLowerCase();
     if (!createHeroBody) new HttpException('NOT BODY', HttpStatus.BAD_REQUEST);
 
     const hero = this.heroRepository.create(createHeroBody);
@@ -44,7 +46,7 @@ export class HeroesService {
     const hero = await this.heroRepository.findOne({
       where: { id },
       relations: {
-        tavern: true,
+        skills: true,
       },
     });
     if (!hero) new HttpException('HERO NOT FOUND', HttpStatus.NOT_FOUND);
@@ -56,6 +58,9 @@ export class HeroesService {
     name.toLowerCase();
     const hero = await this.heroRepository.findOne({
       where: { slug: name },
+      relations: {
+        skills: true,
+      },
     });
 
     if (!hero) new HttpException('HERO NOT FOUND', HttpStatus.NOT_FOUND);
@@ -67,5 +72,17 @@ export class HeroesService {
     if (!hero) new HttpException('HERO NOT FOUND', HttpStatus.NOT_FOUND);
     await this.heroRepository.delete(id);
     return 'USER DELETED';
+  }
+
+  async update(id: string, UpdateHero: UpdateHero) {
+    const hero = await this.heroRepository.findBy({ id });
+
+    if (!hero) {
+      throw new HttpException('HERO NOT FOUND', HttpStatus.NOT_FOUND);
+    }
+
+    await this.heroRepository.update(id, UpdateHero);
+
+    return this.heroRepository.findBy({ id });
   }
 }
