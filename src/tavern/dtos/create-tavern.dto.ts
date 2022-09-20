@@ -9,7 +9,6 @@ export class CreateTavern {
   @IsNotEmpty()
   tavern_url: string;
 
-  @IsString()
-  @IsNotEmpty()
-  heroes: Heroes;
+  @IsOptional()
+  heroes: Heroes[];
 }

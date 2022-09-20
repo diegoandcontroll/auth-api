@@ -7,6 +7,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -22,9 +23,6 @@ export class Tavern {
   @Column()
   tavern_url: string;
 
-  @ManyToOne((type) => Heroes, (tavern) => tavern.tavern)
-  heroes: Heroes;
-
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;
 
@@ -33,4 +31,7 @@ export class Tavern {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: string;
+
+  @OneToMany(() => Heroes, (heroes) => heroes.tavern)
+  heroes: Heroes[];
 }

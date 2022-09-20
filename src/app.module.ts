@@ -13,6 +13,7 @@ import { Heroes } from './heroes/hero.entity';
 import { TokenEntity } from './token/token.entity';
 import { Tavern } from './tavern/tavern.entity';
 import { UsersEntity } from './users/user.entity';
+import { SkillsModule } from './skills/skills.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { UsersEntity } from './users/user.entity';
     UsersModule,
     HeroesModule,
     TavernModule,
+    SkillsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

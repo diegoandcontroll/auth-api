@@ -1,5 +1,12 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Tavern } from 'src/tavern/tavern.entity';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
+
+import { TavernService } from 'src/tavern/tavern.service';
 import { Repository } from 'typeorm';
 import { CreateHero } from './dtos/create-heros.dto';
 import { Heroes } from './hero.entity';
@@ -9,12 +16,16 @@ export class HeroesService {
   constructor(
     @Inject('HERO_REPOSITORY')
     private readonly heroRepository: Repository<Heroes>,
+
+    @Inject(forwardRef(() => TavernService))
+    private tavernService: TavernService,
   ) {}
 
   async findHeroes(): Promise<Heroes[]> {
     return await this.heroRepository.find({
       relations: {
         tavern: true,
+        skills: true,
       },
     });
   }
@@ -45,9 +56,6 @@ export class HeroesService {
     name.toLowerCase();
     const hero = await this.heroRepository.findOne({
       where: { slug: name },
-      relations: {
-        tavern: true,
-      },
     });
 
     if (!hero) new HttpException('HERO NOT FOUND', HttpStatus.NOT_FOUND);

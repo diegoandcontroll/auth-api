@@ -1,4 +1,6 @@
 import { IsString, IsNumber, IsNotEmpty, IsOptional } from 'class-validator';
+import { Skills } from 'src/skills/skills.entity';
+
 import { Tavern } from 'src/tavern/tavern.entity';
 export class CreateHero {
   @IsString()
@@ -50,6 +52,9 @@ export class CreateHero {
   mana_points: number;
 
   @IsString()
+  @IsNotEmpty()
+  tavern: Tavern;
+
   @IsOptional()
-  tavern: Tavern[];
+  skills: Skills[];
 }
