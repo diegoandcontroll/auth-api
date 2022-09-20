@@ -43,8 +43,8 @@ export class CreateSkills {
   level_3: string;
 
   @IsString()
-  @IsNotEmpty()
-  level_4: string;
+  @IsOptional()
+  level_4?: string;
 
   @IsNotEmpty()
   heroes: Heroes;

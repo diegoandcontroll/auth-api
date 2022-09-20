@@ -1,6 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { HeroesService } from './heroes.service';
 import { CreateHero } from './dtos/create-heros.dto';
+import { UpdateHero } from './dtos/update-hero.dto';
 @Controller('heroes')
 export class HeroesController {
   constructor(private readonly heroService: HeroesService) {}
@@ -26,5 +35,9 @@ export class HeroesController {
   @Get('hero/:slug')
   async findSlug(@Param('slug') slug: string) {
     return this.heroService.findSlug(slug);
+  }
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() body: UpdateHero) {
+    return this.heroService.update(id, body);
   }
 }

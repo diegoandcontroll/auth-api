@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { CreateSkills } from './dtos/create-skills.dto';
+import { UpdateSkills } from './dtos/update-skills.dto';
 import { Skills } from './skills.entity';
 
 @Injectable()
@@ -18,5 +19,17 @@ export class SkillsService {
 
   async find(): Promise<Skills[]> {
     return this.skillsRepository.find();
+  }
+
+  async update(id: string, updateSkill: UpdateSkills) {
+    const skill = await this.skillsRepository.findBy({ id });
+
+    if (!skill) {
+      throw new HttpException('SKILL NOT FOUND', HttpStatus.NOT_FOUND);
+    }
+
+    await this.skillsRepository.update(id, updateSkill);
+
+    return await this.skillsRepository.findBy({ id });
   }
 }
