@@ -20,4 +20,9 @@ export class SkillsController {
   async update(@Param('id') id: string, @Body() body: UpdateSkills) {
     return this.skillsService.update(id, body);
   }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return this.skillsService.findById(id);
+  }
 }

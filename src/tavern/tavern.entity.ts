@@ -23,6 +23,9 @@ export class Tavern {
   @Column()
   tavern_url: string;
 
+  @Column({ default: 'NO' })
+  type: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;
 
