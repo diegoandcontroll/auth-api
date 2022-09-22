@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { Tavern } from './tavern.entity';
 import { CreateTavern } from './dtos/create-tavern.dto';
 import { Heroes } from 'src/heroes/hero.entity';
+import { UpdateTavern } from './dtos/updata-tavern.dto';
 
 @Injectable()
 export class TavernService {
@@ -20,10 +21,36 @@ export class TavernService {
   }
 
   async find(): Promise<Tavern[]> {
-    return this.tavernRepository.find({
+    return await this.tavernRepository.find({
       relations: {
         heroes: true,
       },
     });
+  }
+
+  async findOne(id: string): Promise<Tavern[]> {
+    const tavern = await this.tavernRepository.find({
+      where: { id },
+      relations: {
+        heroes: true,
+      },
+    });
+    if (!tavern) new HttpException('TAVERN NOT FOUND', HttpStatus.NOT_FOUND);
+    return tavern;
+  }
+
+  async update(id: string, updateTavern: UpdateTavern) {
+    const tavern = await this.tavernRepository.findBy({ id });
+    if (!tavern) new HttpException('TAVERN NOT FOUND', HttpStatus.NOT_FOUND);
+
+    await this.tavernRepository.update(id, updateTavern);
+
+    return await this.tavernRepository.findBy({ id });
+  }
+
+  async findSentinel(type: string): Promise<Tavern[]> {
+    const tavern = await this.tavernRepository.findBy({ type });
+    if (!tavern) new HttpException('TAVERN NOT FOUND', HttpStatus.NOT_FOUND);
+    return tavern;
   }
 }
