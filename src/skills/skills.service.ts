@@ -21,6 +21,20 @@ export class SkillsService {
     return this.skillsRepository.find();
   }
 
+  async findById(id: string) {
+    const skill = await this.skillsRepository.find({
+      where: { id },
+      relations: {
+        heroes: true,
+      },
+    });
+    if (!skill) {
+      throw new HttpException('SKILL NOT FOUND', HttpStatus.NOT_FOUND);
+    }
+
+    return skill;
+  }
+
   async update(id: string, updateSkill: UpdateSkills) {
     const skill = await this.skillsRepository.findBy({ id });
 
